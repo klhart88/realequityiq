@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" href="/realequityiq-apple-touch-icon-180.png">
+<title>RealEquityIQ — Explore Financial Decisions and Future Wealth</title>
+<style>
+  :root {
+    --red: #b91c1c;
+    --red-dark: #8f1616;
+    --ink: #17140f;
+    --paper: #ffffff;
+    --cream: #faf8f5;
+    --gray-600: #57534e;
+    --gray-500: #78716c;
+    --gray-200: #e7e5e4;
+    --gray-100: #f2f0ee;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 16px;
+    top: -80px;
+    z-index: 1000;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .skip-link:focus { top: 12px; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2.5px solid var(--red);
+    outline-offset: 2px;
+  }
+
+  .container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 64px);
+  }
+
+  /* ---------- header ---------- */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px clamp(20px, 4vw, 64px);
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo .mark {
+    width: 34px; height: 34px;
+    background: var(--red);
+    color: #fff;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800;
+  }
+  .logo .iq { color: var(--red); }
+  .header-nav { display: flex; gap: 28px; }
+  .header-nav a {
+    color: var(--gray-600);
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+  .header-nav a:hover { color: var(--ink); }
+  @media (max-width: 760px) { .header-nav { display: none; } }
+
+  /* ---------- shared section scaffolding ---------- */
+  section { padding: 88px 0; }
+  section.tight { padding: 72px 0; }
+  section.on-cream { background: var(--cream); }
+  section.on-ink { background: var(--ink); color: #f4f1ea; }
+
+  .eyebrow {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  section.on-ink .eyebrow { color: #e8a4a4; }
+
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head.centered { margin-left: auto; margin-right: auto; text-align: center; }
+
+  h2.section-title {
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.18;
+    margin: 0 0 14px;
+  }
+
+  p.section-sub {
+    font-size: 17.5px;
+    color: var(--gray-600);
+    line-height: 1.68;
+    margin: 0;
+  }
+  section.on-ink p.section-sub { color: #cfc9c0; }
+
+  /* ================= HERO ================= */
+  .hero { padding-top: 12px; padding-bottom: 88px; }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: 52px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(30px, 3.4vw, 44px);
+    line-height: 1.12;
+    margin: 0 0 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .hero-copy p.sub {
+    font-size: 18px;
+    line-height: 1.66;
+    color: var(--gray-600);
+    max-width: 52ch;
+    margin: 0 0 28px;
+  }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    background: transparent;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { background: var(--red-dark); }
+  .btn-secondary { color: var(--red); border-color: var(--red); }
+  .btn-secondary:hover { background: #fdf2f2; }
+  .btn-secondary svg { flex-shrink: 0; }
+  .btn-lg { padding: 16px 30px; font-size: 16px; }
+
+  .attribution {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--gray-600);
+    letter-spacing: 0.01em;
+  }
+
+  .coverage-wrap {
+    position: relative;
+    display: inline-block;
+    margin-top: 16px;
+  }
+
+  .coverage-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 8px 11px;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    background: rgba(255,255,255,.88);
+    color: var(--gray-600);
+    font-size: 12.5px;
+    line-height: 1.2;
+    box-shadow: 0 2px 8px rgba(23,20,15,.03);
+  }
+
+  .coverage-pin { font-size: 14px; line-height: 1; }
+  .coverage-bar strong { color: var(--ink); font-weight: 700; white-space: nowrap; }
+  .coverage-divider { width: 1px; height: 15px; background: var(--gray-200); }
+  .coverage-note { white-space: nowrap; }
+
+  .coverage-info-wrap { position: relative; display: inline-flex; align-items: center; }
+  .coverage-info {
+    border: 0;
+    background: transparent;
+    color: var(--gray-500);
+    padding: 0 1px;
+    margin: 0;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .coverage-popover {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 10px);
+    transform: translateX(-50%) translateY(-3px);
+    z-index: 20;
+    min-width: 190px;
+    padding: 12px 14px;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--gray-600);
+    box-shadow: 0 12px 30px rgba(23,20,15,.12);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 140ms ease, transform 140ms ease, visibility 140ms ease;
+  }
+
+  .coverage-popover::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    width: 9px; height: 9px;
+    background: #fff;
+    border-left: 1px solid var(--gray-200);
+    border-top: 1px solid var(--gray-200);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .coverage-info-wrap:hover .coverage-popover,
+  .coverage-info-wrap:focus-within .coverage-popover,
+  .coverage-info-wrap.is-open .coverage-popover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  .coverage-popover-title {
+    position: relative;
+    margin: 0 0 7px;
+    color: var(--ink);
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .coverage-state { position: relative; font-size: 12.5px; line-height: 1.6; }
+
+  @media (max-width: 520px) {
+    .coverage-bar { gap: 6px; font-size: 11.5px; padding: 8px 9px; }
+    .coverage-popover { left: 0; transform: translateX(-35%) translateY(-3px); }
+    .coverage-info-wrap:hover .coverage-popover,
+    .coverage-info-wrap:focus-within .coverage-popover,
+    .coverage-info-wrap.is-open .coverage-popover { transform: translateX(-35%) translateY(0); }
+  }
+
+  .hero-video-col { display: flex; flex-direction: column; align-items: center; }
+
+  .hero-video-slot {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 16 / 9;
+    border-radius: 22px;
+    padding: 10px;
+    background: linear-gradient(155deg, #2a2622, #0c0a08);
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+  @media (max-width: 900px) { .hero-video-slot { max-width: 480px; } }
+  @media (max-width: 600px) { .hero-video-slot { max-width: 100%; border-radius: 16px; } }
+
+  .hero-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 14px;
+    background: #000;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+  /* controlsList="nofullscreen" disables the native fullscreen button in
+     Chrome/Edge but leaves it visibly grayed-out rather than removing it --
+     confusing next to our own working fullscreen button. These WebKit/Blink
+     media-control pseudo-elements let us remove it outright instead. Not
+     supported in Firefox, which has no equivalent hook; its native button
+     remains (see the fullscreenchange handler notes in the script below). */
+  .hero-video::-webkit-media-controls-fullscreen-button {
+    display: none !important;
+  }
+
+  .video-fade-overlay {
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border-radius: 14px;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+    z-index: 5;
+  }
+  .video-fade-overlay.visible { opacity: 1; }
+
+  .hero-video-slot {
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  /* When fullscreen is redirected to the container (see script), it should
+     fill the viewport edge-to-edge rather than keeping its card padding. */
+  .hero-video-slot:fullscreen,
+  .hero-video-slot:-webkit-full-screen {
+    max-width: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    border-radius: 0;
+    background: #000;
+  }
+  .hero-video-slot:fullscreen .hero-video,
+  .hero-video-slot:-webkit-full-screen .hero-video {
+    border-radius: 0;
+  }
+
+  .video-message {
+    position: absolute;
+    left: clamp(14px, 2.5vw, 28px);
+    bottom: clamp(56px, 7vw, 76px);
+    z-index: 3;
+    width: clamp(180px, 36%, 280px);
+    padding: 12px 14px 13px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-left: 3px solid #C40000;
+    border-radius: 12px;
+    color: #fff;
+    background: rgba(20,16,13,.56);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.20);
+    transform: translateY(0);
+    opacity: 1;
+    transition: opacity 250ms ease, transform 250ms ease;
+    pointer-events: none;
+  }
+  .video-message.is-changing { opacity: 0; transform: translateY(8px); }
+  .video-message-kicker {
+    display: block;
+    margin-bottom: 3px;
+    color: #D8B876;
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .video-message strong {
+    display: block;
+    font-size: clamp(13px, 1.3vw, 17px);
+    line-height: 1.22;
+    letter-spacing: -.01em;
+  }
+  .video-play-full {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 9px 13px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(20,16,13,.76);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .video-play-full:hover,
+  .video-play-full:focus-visible { background: rgba(196,0,0,.92); outline: none; }
+  .video-play-icon { font-size: 10px; }
+
+  .video-fullscreen-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 4;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(20,16,13,.6);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+  }
+  .video-fullscreen-btn:hover,
+  .video-fullscreen-btn:focus-visible { background: rgba(196,0,0,.85); outline: none; }
+  .hero-video-slot.is-walkthrough .video-fullscreen-btn { display: flex; }
+  .hero-video-slot:fullscreen .video-fullscreen-btn,
+  .hero-video-slot:-webkit-full-screen .video-fullscreen-btn { display: none; }
+  /* Only the teaser's "watch full video" button is walkthrough-irrelevant;
+     the message card now continues into walkthrough mode with its own cues. */
+  .hero-video-slot.is-walkthrough .video-play-full { display: none; }
+  @media (max-width: 600px) {
+    .video-message { bottom: 52px; padding: 10px 12px; width: clamp(160px, 52%, 240px); }
+    .video-play-full { right: 12px; bottom: 12px; font-size: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .video-message { transition: none; }
+  }
+
+  /* ================= WHY DIFFERENT ================= */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 800px) { .compare-grid { grid-template-columns: 1fr; } }
+
+  .compare-card {
+    background: var(--paper);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+  .compare-card .old {
+    font-size: 13px;
+    color: var(--gray-500);
+    text-decoration: line-through;
+    margin-bottom: 8px;
+  }
+  .compare-card .new {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .compare-card .new .accent { color: var(--red); }
+
+  /* ================= JOURNEY STEPS ================= */
+  .steps-rail {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 24px 20px;
+    align-items: stretch;
+  }
+  .steps-rail .step-card { grid-column: span 2; }
+  .steps-rail .step-card:nth-child(5) { grid-column: 2 / span 2; }
+  .steps-rail .step-card:nth-child(6) { grid-column: 4 / span 2; }
+  .steps-rail .step-card:nth-child(7) { grid-column: 6 / span 2; }
+
+  @media (max-width: 860px) {
+    .steps-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .steps-rail .step-card,
+    .steps-rail .step-card:nth-child(5),
+    .steps-rail .step-card:nth-child(6) { grid-column: auto; }
+    .steps-rail .step-card:nth-child(7) {
+      grid-column: 1 / -1;
+      width: min(100%, 420px);
+      justify-self: center;
+    }
+  }
+  @media (max-width: 520px) {
+    .steps-rail { grid-template-columns: 1fr; gap: 16px; }
+    .steps-rail .step-card:nth-child(7) { grid-column: auto; width: 100%; }
+  }
+
+  .step-card {
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 26px 22px;
+    border: 1px solid var(--gray-200);
+    min-height: 100%;
+  }
+  .step-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    font-size: 12.5px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  .step-card h3 { font-size: 16px; margin: 0 0 8px; font-weight: 800; }
+  .step-card p { font-size: 14.5px; color: var(--gray-600); margin: 0; line-height: 1.65; }
+
+  /* ================= PATH CARDS ================= */
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+  }
+  .path-grid .path-card { grid-column: span 2; }
+  .path-grid .path-card:nth-child(4) { grid-column: 2 / span 2; }
+  .path-grid .path-card:nth-child(5) { grid-column: 4 / span 2; }
+
+  @media (max-width: 860px) {
+    .path-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .path-grid .path-card,
+    .path-grid .path-card:nth-child(4) { grid-column: auto; }
+    .path-grid .path-card:nth-child(5) {
+      grid-column: 1 / -1;
+      width: min(100%, 440px);
+      justify-self: center;
+    }
+  }
+  @media (max-width: 520px) {
+    .path-grid { grid-template-columns: 1fr; gap: 16px; }
+    .path-grid .path-card:nth-child(5) { grid-column: auto; width: 100%; }
+  }
+
+  .path-card {
+    background: var(--paper);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    text-align: left;
+    min-height: 100%;
+  }
+  .path-card .emoji { font-size: 30px; margin-bottom: 16px; display: block; }
+  .path-card h3 { font-size: 17px; margin: 0 0 8px; font-weight: 800; line-height: 1.35; }
+  .path-card p { font-size: 14.5px; color: var(--gray-600); margin: 0; line-height: 1.65; }
+
+  /* ================= FEATURES ================= */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 800px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  #features {
+    padding-top: 76px;
+    padding-bottom: 76px;
+  }
+  #features .section-head { margin-bottom: 40px; }
+
+  .feature-card { padding: 6px; }
+  .feature-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(185,28,28,0.12);
+    color: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  section.on-ink .feature-icon { background: rgba(255,255,255,0.1); color: #f0a8a8; }
+  .feature-icon svg { width: 24px; height: 24px; }
+  .feature-card h3 { font-size: 17.5px; margin: 0 0 9px; font-weight: 800; }
+  .feature-card p { font-size: 15px; color: var(--gray-600); margin: 0; line-height: 1.66; }
+  section.on-ink .feature-card p { color: #cfc9c0; }
+
+  /* ================= WHO IT'S FOR ================= */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 900px) { .persona-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .persona-grid { grid-template-columns: 1fr; } }
+
+  .persona-card {
+    background: var(--cream);
+    border-radius: var(--radius);
+    padding: 22px;
+    border: 1px solid var(--gray-200);
+  }
+  .persona-card p { font-size: 15.5px; font-weight: 600; margin: 0; line-height: 1.62; }
+
+  /* ================= CREATOR ================= */
+  .creator-block {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    flex-direction: column;
+  }
+  .creator-logo {
+    display: block;
+    width: min(220px, 70vw);
+    max-height: 72px;
+    object-fit: contain;
+  }
+
+  .creator-logo-fallback {
+    display: none;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .video-fade-overlay { transition: none; }
+  }
+
+  /* ================= FINAL CTA ================= */
+  .final-cta {
+    text-align: center;
+    padding-top: 64px;
+    padding-bottom: 58px;
+  }
+  .final-cta h2 {
+    font-size: clamp(26px, 3.4vw, 38px);
+    font-weight: 800;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .final-cta p { color: var(--gray-600); margin: 0 0 22px; font-size: 17px; line-height: 1.6; }
+
+  /* ---------- footer ---------- */
+  footer {
+    padding: 26px 0;
+    border-top: 1px solid var(--gray-200);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--gray-500);
+    text-align: center;
+  }
+
+  @media (max-width: 520px) {
+    .hero-copy p.sub,
+    p.section-sub { font-size: 16.5px; }
+    .step-card,
+    .path-card { padding: 22px 20px; }
+    .feature-card p,
+    .persona-card p { font-size: 14.5px; }
+  }
+
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <a class="logo" href="#top"><span class="mark">R</span>RealEquity<span class="iq">IQ</span></a>
+    <nav class="header-nav" aria-label="Primary navigation">
+      <a href="#journey">How It Works</a>
+      <a href="#paths">Paths</a>
+      <a href="#features">Features</a>
+      <a href="#who">Who It's For</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+  <!-- ================= 1. HERO ================= -->
+  <section class="hero" id="top">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">Free to Start</div>
+        <h1>Financial strategy is more than choosing where to invest. It's about building your future wealth.</h1>
+        <p class="sub">Discover how today's financial decisions can shape your future wealth. Compare multiple paths, explore long-term outcomes, and experience an interactive journey before committing to your next move.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://app.realequityiq.com/">Start Your Journey</a>
+          <button class="btn btn-secondary" id="ctaWatch">
+            <svg aria-hidden="true" focusable="false" width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 6.13397C11.6667 6.51888 11.6667 7.48112 11 7.86603L1.5 13.3301C0.833332 13.715 0 13.2339 0 12.4641L0 1.5359C0 0.766097 0.833333 0.284997 1.5 0.669897L11 6.13397Z" fill="currentColor"/>
+            </svg>
+            See RealEquityIQ in Action
+          </button>
+        </div>
+        <div class="coverage-wrap" aria-label="RealEquityIQ geographic coverage">
+          <div class="coverage-bar">
+            <span class="coverage-pin" aria-hidden="true">📍</span>
+            <strong>2 States Covered</strong>
+            <span class="coverage-info-wrap" id="coverageInfoWrap">
+              <button class="coverage-info" id="coverageInfoBtn" type="button" aria-label="Show currently available states" aria-expanded="false">ⓘ</button>
+              <span class="coverage-popover" id="coveragePopover" role="status">
+                <span class="coverage-popover-title">Currently Available</span>
+                <span class="coverage-state">Indiana</span><br>
+                <span class="coverage-state">Illinois</span>
+              </span>
+            </span>
+            <span class="coverage-divider" aria-hidden="true"></span>
+            <span class="coverage-note">Expanding Nationwide</span>
+          </div>
+        </div>
+        <div class="attribution">Created by SmartIQ Realty • Designed to help you make more informed financial decisions.</div>
+      </div>
+
+      <div class="hero-video-col">
+        <div class="hero-video-slot" id="heroVideoSlot">
+          <video
+            id="heroVideo"
+            class="hero-video"
+            playsinline
+            preload="metadata"
+            poster="assets/img/hero-video-poster-teaser-v5.jpg"
+            muted
+            loop
+            autoplay
+            controlsList="nofullscreen"
+            aria-label="RealEquityIQ product preview. Activate to play the full walkthrough."
+            tabindex="0"
+            role="button"
+          >
+            <source src="assets/video/realequityiq-hero-teaser-v5.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+          <div class="video-message" id="videoMessage" aria-hidden="true">
+            <span class="video-message-kicker">RealEquityIQ</span>
+            <strong id="videoMessageTitle">Explore your financial future.</strong>
+          </div>
+          <button class="video-play-full" id="videoPlayFull" type="button">
+            <span class="video-play-icon" aria-hidden="true">▶</span>
+            See RealEquityIQ in Action
+          </button>
+          <button class="video-fullscreen-btn" id="videoFullscreenBtn" type="button" aria-label="Enter fullscreen">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="video-fade-overlay" id="fadeOverlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. WHY DIFFERENT ================= -->
+  <section class="on-cream">
+    <div class="container">
+      <div class="section-head centered">
+        <div class="eyebrow">Why RealEquityIQ</div>
+        <h2 class="section-title">A different way to explore financial decisions.</h2>
+        <p class="section-sub">Most tools give you one number for one scenario. RealEquityIQ compares your actual paths, side by side, in the county you're deciding in.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="old">One scenario at a time</div>
+          <div class="new">Every path, <span class="accent">side by side</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="old">National averages</div>
+          <div class="new">Data for <span class="accent">where you actually live</span></div>
+        </div>
+        <div class="compare-card">
+          <div class="old">A single output number</div>
+          <div class="new">A 20-year story <span class="accent">you can walk through</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. EXPERIENCE THE JOURNEY ================= -->
+  <section id="journey">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Experience the Journey</div>
+        <h2 class="section-title">Discover, compare, and choose — then watch it play out.</h2>
+        <p class="section-sub">Every journey follows the same proven path—from discovery to execution.</p>
+      </div>
+      <div class="steps-rail">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Discover</h3>
+          <p>Start with your local market. Ground everything in real county data.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Personalize</h3>
+          <p>Build your financial profile — your numbers, not a generic default.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Compare</h3>
+          <p>Explore different paths: renting, buying, house hacking, investing, waiting.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <h3>Predict</h3>
+          <p>See how each path could perform over 20 years, not just guess.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">5</div>
+          <h3>Choose</h3>
+          <p>Understand what drives the number, then choose with confidence.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">6</div>
+          <h3>Execute</h3>
+          <p>Follow the journey step by step — real milestones, start to finish.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">7</div>
+          <h3>Celebrate</h3>
+          <p>Celebrate what you complete, then explore another path.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. EXPLORE THE WEALTH-BUILDING PATHS ================= -->
+  <section class="on-cream" id="paths">
+    <div class="container">
+      <div class="section-head centered">
+        <div class="eyebrow">Explore the Wealth-Building Paths</div>
+        <h2 class="section-title">Five paths. One informed decision.</h2>
+        <p class="section-sub">The winner is whoever builds the highest net worth — not whoever buys the most property.</p>
+      </div>
+      <div class="path-grid">
+        <div class="path-card">
+          <span class="emoji">🏢</span>
+          <h3>Continue Renting</h3>
+          <p>Stay flexible, invest the difference.</p>
+        </div>
+        <div class="path-card">
+          <span class="emoji">🏠</span>
+          <h3>Buy a Starter Home</h3>
+          <p>Build equity, own your space.</p>
+        </div>
+        <div class="path-card">
+          <span class="emoji">🏘️</span>
+          <h3>Buy a Duplex &amp; House Hack</h3>
+          <p>Let your tenant pay your mortgage.</p>
+        </div>
+        <div class="path-card">
+          <span class="emoji">📈</span>
+          <h3>Invest in the Stock Market</h3>
+          <p>Skip real estate, go full portfolio.</p>
+        </div>
+        <div class="path-card">
+          <span class="emoji">⏳</span>
+          <h3>Wait for Lower Rates</h3>
+          <p>Hold cash, time the market.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6. PLATFORM FEATURES ================= -->
+  <section class="on-ink" id="features">
+    <div class="container">
+      <div class="section-head centered">
+        <div class="eyebrow">Platform Features</div>
+        <h2 class="section-title">Built to explain itself, every step of the way.</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H7l-3 3V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Guided Narration</h3>
+          <p>Plain-language guidance through every step.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 12c4-8 12-8 16 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="4" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="6" r="1.6" fill="currentColor"/><circle cx="20" cy="12" r="1.6" fill="currentColor"/></svg>
+          </div>
+          <h3>Interactive Journey Maps</h3>
+          <p>A visual path that keeps your progress in view.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M12 20V4M20 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Wealth Projections</h3>
+          <p>Compare conservative, base, and optimistic outcomes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Milestone Tracking</h3>
+          <p>Track real-world steps from preparation through completion.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.6 6.6L21 9l-5 4.4L17.5 21 12 17.3 6.5 21 8 13.4 3 9l6.4-.4L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Achievement Recognition</h3>
+          <p>Recognize progress through completed journeys and earned ranks.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 3 6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 16v-4h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Long-Term Engagement</h3>
+          <p>Return to explore new scenarios and continue learning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 7. WHO IT'S FOR ================= -->
+  <section class="on-cream" id="who">
+    <div class="container">
+      <div class="section-head centered">
+        <div class="eyebrow">Who It's For</div>
+        <h2 class="section-title">Built for the decision you're actually facing.</h2>
+      </div>
+      <div class="persona-grid">
+        <div class="persona-card"><p>First-time buyers deciding if now is the moment.</p></div>
+        <div class="persona-card"><p>Renters who want proof before they commit.</p></div>
+        <div class="persona-card"><p>House hackers weighing a duplex against a starter home.</p></div>
+        <div class="persona-card"><p>Investors deciding between real estate and the market.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 8. CREATED BY SMARTIQ REALTY ================= -->
+  <section class="on-ink">
+    <div class="container">
+      <div class="creator-block">
+        <img class="creator-logo" src="assets/img/smartiq-realty-logo-dark.svg" alt="SmartIQ Realty" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="creator-logo-fallback" aria-hidden="true">SmartIQ Realty</div>
+        <p style="font-size:16px; line-height:1.65; color:#cfc9c0; margin:0;">Created by SmartIQ Realty • Designed to help you make more informed financial decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 9. FINAL CTA ================= -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Start building your future wealth today.</h2>
+      <p>Free to start. No commitment required.</p>
+      <a class="btn btn-primary btn-lg" href="https://app.realequityiq.com/">Start Your Journey</a>
+    </div>
+  </section>
+
+  </main>
+
+  <footer>
+    <div class="container">© RealEquityIQ. Created by SmartIQ Realty.</div>
+  </footer>
+
+<script>
+(function () {
+  const video = document.getElementById('heroVideo');
+  const slot = document.getElementById('heroVideoSlot');
+  const overlay = document.getElementById('fadeOverlay');
+  const ctaWatch = document.getElementById('ctaWatch');
+  const playFullButton = document.getElementById('videoPlayFull');
+  const fullscreenBtn = document.getElementById('videoFullscreenBtn');
+  const message = document.getElementById('videoMessage');
+  const messageTitle = document.getElementById('videoMessageTitle');
+  const coverageInfoWrap = document.getElementById('coverageInfoWrap');
+  const coverageInfoBtn = document.getElementById('coverageInfoBtn');
+
+  if (coverageInfoWrap && coverageInfoBtn) {
+    coverageInfoBtn.addEventListener('click', event => {
+      event.stopPropagation();
+      const isOpen = coverageInfoWrap.classList.toggle('is-open');
+      coverageInfoBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', event => {
+      if (!coverageInfoWrap.contains(event.target)) {
+        coverageInfoWrap.classList.remove('is-open');
+        coverageInfoBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        coverageInfoWrap.classList.remove('is-open');
+        coverageInfoBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+
+  const TEASER_SRC = 'assets/video/realequityiq-hero-teaser-v5.mp4';
+  const TEASER_POSTER = 'assets/img/hero-video-poster-teaser-v5.jpg';
+  const FULL_SRC = 'assets/video/realequityiq-walkthrough-full-v5.mp4';
+  const FULL_POSTER = 'assets/img/hero-video-poster-full-v5.jpg';
+  const FADE_MS = 250;
+  const HOLD_BLACK_MS = 350;
+  const HOLD_FINAL_FRAME_MS = 1800;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const teaserCues = [
+    { start: 0.00, end: 4.25, text: 'Explore your financial future.' },
+    { start: 4.25, end: 8.50, text: 'Compare wealth-building paths.' },
+    { start: 8.50, end: 12.75, text: 'Project your future net worth.' },
+    { start: 12.75, end: 17.00, text: 'Understand what drives the result.' },
+    { start: 17.00, end: 21.25, text: 'Follow a guided journey.' },
+    { start: 21.25, end: 25.50, text: 'Build confidence before your next move.' },
+    { start: 25.50, end: 30.30, text: 'Click to see RealEquityIQ in action.' }
+  ];
+
+  // Matches the 8 walkthrough segment boundaries in build-walkthrough.sh
+  // (each xfade offset = the next segment's cue start).
+  const walkthroughCues = [
+    { start: 0.00,  end: 6.65,  text: 'Start with your local market.' },
+    { start: 6.65,  end: 14.30, text: 'Build your financial profile.' },
+    { start: 14.30, end: 21.95, text: 'Explore different financial paths.' },
+    { start: 21.95, end: 30.60, text: 'See how each path could perform.' },
+    { start: 30.60, end: 41.25, text: 'Compare paths side by side.' },
+    { start: 41.25, end: 48.90, text: 'Choose with confidence.' },
+    { start: 48.90, end: 57.55, text: 'Follow the journey, step by step.' },
+    { start: 57.55, end: 999,   text: 'Celebrate what you complete.' }
+  ];
+
+  let mode = 'teaser';
+  let currentCue = -1;
+  let iosFullscreenActive = false;
+
+  function isFullscreen() {
+    return document.fullscreenElement === video ||
+           document.fullscreenElement === slot ||
+           document.webkitFullscreenElement === video ||
+           document.webkitFullscreenElement === slot ||
+           iosFullscreenActive;
+  }
+
+  function fadeToBlack() {
+    return new Promise(resolve => {
+      overlay.classList.add('visible');
+      window.setTimeout(resolve, FADE_MS);
+    });
+  }
+
+  function holdOnBlack() {
+    return new Promise(resolve => window.setTimeout(resolve, HOLD_BLACK_MS));
+  }
+
+  function fadeIn() {
+    requestAnimationFrame(() => overlay.classList.remove('visible'));
+  }
+
+  function waitForPlayingOrTimeout(maxMs) {
+    return new Promise(resolve => {
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        resolve();
+      };
+      video.addEventListener('playing', finish, { once: true });
+      window.setTimeout(finish, maxMs);
+    });
+  }
+
+  function setSource(src) {
+    video.querySelectorAll('source').forEach(source => source.remove());
+    const source = document.createElement('source');
+    source.src = src;
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    video.load();
+  }
+
+  function updateMessage() {
+    const cues = mode === 'walkthrough' ? walkthroughCues : teaserCues;
+    const index = cues.findIndex(cue =>
+      video.currentTime >= cue.start && video.currentTime < cue.end
+    );
+    if (index < 0 || index === currentCue) return;
+    currentCue = index;
+    message.classList.add('is-changing');
+    window.setTimeout(() => {
+      messageTitle.textContent = cues[index].text;
+      message.classList.remove('is-changing');
+    }, 180);
+  }
+
+  async function playTeaser() {
+    await fadeToBlack();
+    await holdOnBlack();
+    mode = 'teaser';
+    currentCue = -1;
+    slot.classList.remove('is-walkthrough');
+    video.removeAttribute('controls');
+    video.style.cursor = 'pointer';
+    video.muted = true;
+    video.loop = true;
+    video.poster = TEASER_POSTER;
+    setSource(TEASER_SRC);
+    if (!reduceMotion) video.play().catch(() => {});
+    await waitForPlayingOrTimeout(600);
+    fadeIn();
+    updateMessage();
+  }
+
+  async function playWalkthrough() {
+    await fadeToBlack();
+    await holdOnBlack();
+    mode = 'walkthrough';
+    currentCue = -1;
+    slot.classList.add('is-walkthrough');
+    video.loop = false;
+    video.style.cursor = '';
+    video.poster = FULL_POSTER;
+    setSource(FULL_SRC);
+    video.muted = false;
+    video.currentTime = 0;
+    video.setAttribute('controls', '');
+    video.play().catch(() => {});
+    await waitForPlayingOrTimeout(600);
+    fadeIn();
+    messageTitle.textContent = walkthroughCues[0].text;
+  }
+
+  function enterWalkthrough() {
+    if (mode !== 'walkthrough') playWalkthrough();
+  }
+
+  ctaWatch.addEventListener('click', enterWalkthrough);
+  playFullButton.addEventListener('click', enterWalkthrough);
+  fullscreenBtn.addEventListener('click', () => {
+    // Called directly inside the click handler -- no promise chain, no
+    // exit-then-reenter dance -- so this is always still within the
+    // original user gesture and browsers won't reject it.
+    try {
+      const request = slot.requestFullscreen || slot.webkitRequestFullscreen;
+      if (request) {
+        const result = request.call(slot);
+        if (result && typeof result.catch === 'function') result.catch(() => {});
+      }
+    } catch (e) {}
+  });
+  video.addEventListener('click', () => {
+    if (mode === 'teaser') enterWalkthrough();
+  });
+  video.addEventListener('keydown', event => {
+    if (mode === 'teaser' && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      enterWalkthrough();
+    }
+  });
+
+  video.addEventListener('timeupdate', updateMessage);
+
+  video.addEventListener('ended', () => {
+    if (mode !== 'walkthrough' || isFullscreen()) return;
+    window.setTimeout(() => {
+      if (mode === 'walkthrough' && !isFullscreen()) playTeaser();
+    }, HOLD_FINAL_FRAME_MS);
+  });
+
+  function handleFullscreenChange() {
+    // Note: if a visitor uses the browser's OWN native fullscreen control on
+    // the video (in Firefox/Safari, where controlsList="nofullscreen" isn't
+    // honored), that fullscreens the bare <video> only -- overlays won't be
+    // part of that view. That's a platform limitation, not something this
+    // handler tries to fix anymore (a prior version attempted to redirect
+    // fullscreen to the container here, but chaining requestFullscreen()
+    // after exitFullscreen() inside a promise callback loses the original
+    // user-gesture context in real browsers and was rejecting silently,
+    // which is what caused the reset-to-teaser glitch). Our own fullscreen
+    // button calls slot.requestFullscreen() directly and synchronously
+    // instead, which is reliable.
+    if (!isFullscreen() && mode === 'walkthrough') playTeaser();
+  }
+  document.addEventListener('fullscreenchange', handleFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+  video.addEventListener('webkitbeginfullscreen', () => { iosFullscreenActive = true; });
+  video.addEventListener('webkitendfullscreen', () => {
+    iosFullscreenActive = false;
+    if (mode === 'walkthrough') playTeaser();
+  });
+
+  if (reduceMotion) {
+    video.pause();
+    video.removeAttribute('autoplay');
+    video.loop = false;
+  }
+})();
+</script>
+
+</body>
+</html>

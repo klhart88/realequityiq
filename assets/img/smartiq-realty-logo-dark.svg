@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 126" role="img" aria-labelledby="title desc">
+<title id="title">SmartIQ Realty</title><desc id="desc">SmartIQ Realty — Smarter moves start here</desc>
+<style>
+.logo{font-family:'Montserrat','Avenir Next','Gotham',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+.smart{font-size:68px;font-weight:950;letter-spacing:-0.06em;fill:#c40000}
+.iq{font-size:68px;font-weight:760;letter-spacing:-0.06em;fill:#ffffff}
+.realty{font-size:40px;font-weight:450;letter-spacing:-0.035em;fill:#b8bcc4}
+.tag{font-size:24px;font-weight:900;letter-spacing:0.085em;fill:#d4d5d7}
+</style>
+<g class="logo">
+  <text x="17" y="69" class="smart">Smart</text>
+  <text x="219" y="69" class="iq">IQ</text>
+  <text x="307" y="69" class="realty">Realty</text>
+  <text x="18" y="108" class="tag">SMARTER MOVES START HERE</text>
+</g>
+</svg>
